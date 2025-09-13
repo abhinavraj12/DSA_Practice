@@ -1,0 +1,19 @@
+#26. Remove Duplicates from Sorted Array
+//https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+
+Solution:
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0) return 0;
+
+        int i = 0; // Pointer to place the next unique element
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != nums[i]) {
+                i++; // Move pointer forward
+                nums[i] = nums[j]; // Place the unique element
+            }
+        }
+        return i + 1; // Total number of unique elements
+    }
+}
