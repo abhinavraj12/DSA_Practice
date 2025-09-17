@@ -93,28 +93,3 @@ class Solution {
          return nums;
     }
 }
-
-
-# 643. Maximum Average Subarray I
-// https://leetcode.com/problems/maximum-average-subarray-i/description/
-
-class Solution {
-    public double findMaxAverage(int[] nums, int k) {
-        int sum =0;
-        int max = Integer.MIN_VALUE;
-        int i =0, j =0;
-        while(j<k) {
-            sum += nums[j++];
-        }
-
-        max = sum;
-        while(j<nums.length) {
-            sum = sum + nums[j] - nums[i];
-            max = Math.max(sum,max);
-            i++;
-            j++;
-        }
-        
-        return (double)max/k;
-    }
-}
