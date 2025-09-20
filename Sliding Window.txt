@@ -83,3 +83,31 @@ class Solution {
         return false;        
     }
 }
+
+# 1695. Maximum Erasure Value
+// https://leetcode.com/problems/maximum-erasure-value/description/
+
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        int i =0, j =0;
+        int sum =0;
+        int max = Integer.MIN_VALUE;
+
+        while(j < nums.length) {
+            if(!set.contains(nums[j])){
+                set.add(nums[j]);
+                sum += nums[j];
+                max  = Math.max(max, sum);
+                j++;
+            } else {
+                set.remove(nums[i]);
+                sum -= nums[i];
+                i++;
+            }
+        }
+        return max;
+    }
+}
