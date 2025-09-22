@@ -139,3 +139,27 @@ class Solution {
         return maxLength;
     }
 }
+
+# 2090. K Radius Subarray Averages
+// https://leetcode.com/problems/k-radius-subarray-averages/description/
+
+class Solution {
+    public int[] getAverages(int[] nums, int k) {
+        int i =0;
+        long sum =0;
+        int window = 2*k +1;
+
+        int[] ans = new int[nums.length];
+        java.util.Arrays.fill(ans, -1);
+
+        for(int j =0;j<nums.length;j++) {
+            sum += nums[j];
+            if(j-i +1 == window) {
+                ans[i+k] = (int)(sum/window);
+                sum -= nums[i];
+                i++;
+            }
+        }
+       return ans;
+    }
+}
