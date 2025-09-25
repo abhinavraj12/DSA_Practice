@@ -186,6 +186,67 @@ class Solution {
     }
 }
 
+# 1456. Maximum Number of Vowels in a Substring of Given Length
+//https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/
 
-# 1004. Max Consecutive Ones III
-// https://leetcode.com/problems/max-consecutive-ones-iii/description/
+Approach 1 without left pointer:
+
+class Solution {
+    public int maxVowels(String s, int k) {
+        Set<Character> vowelSet = new HashSet<>(Arrays.asList('a', 'e','i','o','u', 'A', 'E','I','O','U'));
+        int right =0, vc = 0;;
+        char[] ch = s.toCharArray();
+        int res =Integer.MIN_VALUE;
+        
+        for(right =0;right<k;right++) {
+           if(vowelSet.contains(ch[right])) {
+            vc++;
+           }
+        }
+
+        res = vc;
+
+        while(right < s.length()) {
+            if(vowelSet.contains(ch[right - k])) {
+                vc--;
+            } 
+            if(vowelSet.contains(ch[right])) {
+                vc++;
+            }
+            res = Math.max(res, vc);
+            right ++;
+        }
+        return res;
+    }
+}
+
+Approach 2 with left pointer:
+
+class Solution {
+    public int maxVowels(String s, int k) {
+        Set<Character> vowelSet = new HashSet<>(Arrays.asList('a', 'e','i','o','u', 'A', 'E','I','O','U'));
+        int left =0, right =0, vc = 0;;
+        char[] ch = s.toCharArray();
+        int res =Integer.MIN_VALUE;
+
+        for(right =0;right<k;right++) {
+           if(vowelSet.contains(ch[right])) {
+            vc++;
+           }
+        }
+
+        res = vc;
+
+        while(right < s.length()) {
+            if(vowelSet.contains(ch[left++])) {
+                vc--;
+            } 
+            if(vowelSet.contains(ch[right])) {
+                vc++;
+            }
+            res = Math.max(res, vc);
+            right ++;
+        }
+        return res;
+    }
+}
