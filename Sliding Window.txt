@@ -250,3 +250,27 @@ class Solution {
         return res;
     }
 }
+
+// 3. Longest Substring Without Repeating Characters
+# https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int left =0, right =0;
+        int ans =0;
+        Set<Character> set = new HashSet<>();
+
+        while(right < s.length()) {
+            if(!set.contains(s.charAt(right))) {
+                set.add(s.charAt(right));
+                ans = Math.max(ans, right - left + 1);
+                right++;
+            } else {
+                set.remove(s.charAt(left));
+                left ++;
+            }
+        }
+        return ans;
+    }
+}
+
